@@ -1,0 +1,9 @@
+disaster-management-system/  
+│  
+├── main.py              # Flask application for web backend  
+├── gui.py               # Tkinter-based desktop application  
+├── templates/  
+│   └── index.html       # Web frontend  
+├── scripts/  
+│   └── api_utils.py     # API utility functions for weather and alerts  
+└── static/              # Static assets (if any)  
