@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Disaster Alert System</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=your_google_maps_api_key"></script>
+    <script>
+        function initMap() {
+            const location = { lat: 37.7749, lng: -122.4194 }; // Example coordinates
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 8,
+                center: location,
+            });
+            new google.maps.Marker({
+                position: location,
+                map: map,
+                title: "Disaster-prone Area",
+            });
+        }
+    </script>
+</head>
+<body onload="initMap()">
+    <h1>Disaster Alert System</h1>
+    <form id="weather-form">
+        <input type="text" id="city" placeholder="Enter city">
+        <button type="submit">Get Weather</button>
+    </form>
+    <p id="weather-result"></p>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+    <script>
+        document.getElementById('weather-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const city = document.getElementById('city').value;
+            fetch('/weather', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ city })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('weather-result').innerText = `Weather: ${data.weather}, Temperature: ${data.temp}°C`;
+            });
+        });
+    </script>
+</body>
+</html>
